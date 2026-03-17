@@ -107,6 +107,61 @@ nav {
   text-decoration: underline;
 }
 
+/*** Inventory Grid ***/
+#inv-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  list-style: none;
+  padding: 1rem 0;
+  margin: 0;
+}
+
+#inv-display li {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0.8rem;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#inv-display li img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.namePrice {
+  margin-top: 0.5rem;
+}
+
+.namePrice h2 {
+  font-size: 1rem;
+  border: none;
+  margin: 0.5rem 0;
+}
+
+.namePrice h2 a {
+  color: #333;
+  text-decoration: none;
+}
+
+.namePrice h2 a:hover {
+  color: #00bfff;
+  text-decoration: underline;
+}
+
+.namePrice span {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.notice {
+  color: red;
+  font-weight: bold;
+}
+
 /*** Hero Section ***/
 .hero {
   position: relative;
@@ -233,6 +288,45 @@ img {
 .upgrade-card:hover {
   background-color: #e6f2ff;;
   transform: scale(1.03);
+}
+
+/*** Error Page ***/
+.error-container {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.error-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  animation: drive 2s infinite alternate ease-in-out;
+}
+
+@keyframes drive {
+  from { transform: translateX(-20px); }
+  to   { transform: translateX(20px); }
+}
+
+.error-message {
+  background-color: #fff3cd;
+  border: 2px solid #ffc107;
+  border-radius: 6px;
+  padding: 1rem 1.5rem;
+  margin: 1rem auto;
+  max-width: 600px;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.error-humor {
+  margin: 1.5rem auto;
+  max-width: 500px;
+  color: #555;
+  line-height: 1.8;
+}
+
+.error-home-btn {
+  text-decoration: none;
 }
 
 /*** Footer ***/
