@@ -65,4 +65,57 @@ Util.buildClassificationGrid = async function(data){
  **************************************** */
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
 
+/* ***************************
+ *  Build vehicle detail HTML
+ * ************************** */
+Util.buildVehicleDetail = async function(data) {
+  return `
+    <section class="vehicle-detail">
+      <div class="vehicle-detail__image">
+        <img 
+          src="${data.inv_image}" 
+          alt="Image of ${data.inv_year} ${data.inv_make} ${data.inv_model} on CSE Motors"
+        />
+      </div>
+      <div class="vehicle-detail__info">
+        <h2>${data.inv_year} ${data.inv_make} ${data.inv_model}</h2>
+        <ul class="vehicle-detail__list">
+          <li>
+            <span class="detail-label">Price:</span>
+            <span class="detail-value price">
+              $${new Intl.NumberFormat('en-US').format(data.inv_price)}
+            </span>
+          </li>
+          <li>
+            <span class="detail-label">Year:</span>
+            <span class="detail-value">${data.inv_year}</span>
+          </li>
+          <li>
+            <span class="detail-label">Make:</span>
+            <span class="detail-value">${data.inv_make}</span>
+          </li>
+          <li>
+            <span class="detail-label">Model:</span>
+            <span class="detail-value">${data.inv_model}</span>
+          </li>
+          <li>
+            <span class="detail-label">Mileage:</span>
+            <span class="detail-value">
+              ${new Intl.NumberFormat('en-US').format(data.inv_miles)} miles
+            </span>
+          </li>
+          <li>
+            <span class="detail-label">Color:</span>
+            <span class="detail-value">${data.inv_color}</span>
+          </li>
+          <li>
+            <span class="detail-label">Description:</span>
+            <span class="detail-value">${data.inv_description}</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+  `
+}
+
 module.exports = Util
