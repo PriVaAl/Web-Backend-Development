@@ -394,6 +394,17 @@ footer .copyright {
   margin: 0;
 }
 
+footer .error-link {
+  color: #00a6c6;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+footer .error-link:hover {
+  text-decoration: underline;
+  color: #005fa3;
+}
+
 /****** Desktop ******/
 
 @media screen and (min-width: 768px) {

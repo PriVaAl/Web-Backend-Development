@@ -6,7 +6,7 @@ const invCont = {}
 /* ***************************
  *  Build inventory by classification view
  * ************************** */
-invCont.buildByClassificationId = async function (req, res, next) {
+invCont.buildByClassificationId = utilities.handleErrors(async function (req, res, next) {
   const classification_id = req.params.classificationId
   const data = await invModel.getInventoryByClassificationId(classification_id)
   const grid = await utilities.buildClassificationGrid(data)
@@ -17,12 +17,12 @@ invCont.buildByClassificationId = async function (req, res, next) {
     nav,
     grid,
   })
-}
+})
 
 /* ***************************
  *  Build inventory item detail view
  * ************************** */
-invCont.buildByInventoryId = async function (req, res, next) {
+invCont.buildByInventoryId = utilities.handleErrors(async function (req, res, next) {
   const inv_id = req.params.invId
   const data = await invModel.getInventoryById(inv_id)
   const detail = await utilities.buildVehicleDetail(data)
@@ -33,7 +33,13 @@ invCont.buildByInventoryId = async function (req, res, next) {
     nav,
     detail,
   })
-}
+})
 
+/* ***************************
+ *  Trigger intentional 500 error
+ * ************************** */
+invCont.triggerError = utilities.handleErrors(async function(req, res, next) {
+  throw new Error("Intentional 500 error triggered!")
+})
 
 module.exports = invCont
