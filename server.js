@@ -5,6 +5,7 @@
 /* ***********************
  * Require Statements
  *************************/
+const accountRoute = require("./routes/accountRoute")
 const session = require("express-session")
 const pool = require('./database/')
 const express = require("express")
@@ -15,6 +16,7 @@ const staticRoutes = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const utilities = require("./utilities/")
 const inventoryRoute = require("./routes/inventoryRoute")
+const bodyParser = require("body-parser")
 
 /* ***********************
  * Static Files CSS Images
@@ -35,6 +37,9 @@ app.use(express.static("public"))
   saveUninitialized: true,
   name: 'sessionId',
 }))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
 
 // Express Messages Middleware
 app.use(require('connect-flash')())
@@ -55,6 +60,7 @@ app.set("layout", "./layouts/layout") // not at views root
  *************************/
 app.use(staticRoutes)
 app.use("/inv", inventoryRoute)
+app.use("/account", accountRoute)
 /*************************
  * Index route
  */
