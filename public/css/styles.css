@@ -505,6 +505,141 @@ img {
     background-color: #e6f2ff;
 }
 
+/*** Management View ***/
+.management-view ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.management-view ul li {
+  margin-bottom: 0.8rem;
+}
+
+.management-view ul li a {
+  display: inline-block;
+  background: #00a6c6;
+  color: black;
+  text-decoration: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 3px;
+  font-size: 0.95rem;
+}
+
+.management-view ul li a:hover {
+  background: #005fa3;
+  color: white;
+}
+
+/*** Add Classification Form ***/
+.classification-form {
+  max-width: 400px;
+  margin: 1rem auto;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.classification-form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+  margin-top: 1rem;
+}
+
+.classification-form span {
+  font-size: 0.85rem;
+  color: #555;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.classification-form input {
+  width: 100%;
+  padding: 0.7rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.classification-form input:focus {
+  border-color: #00bfff;
+  outline: none;
+}
+
+/*** Add Inventory Form ***/
+.inventory-form {
+  max-width: 600px;
+  margin: 1rem auto;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.inventory-form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+  margin-top: 1rem;
+}
+
+.inventory-form input,
+.inventory-form textarea,
+.inventory-form select {
+  width: 100%;
+  padding: 0.7rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.inventory-form input:focus,
+.inventory-form textarea:focus,
+.inventory-form select:focus {
+  border-color: #00bfff;
+  outline: none;
+}
+
+.inventory-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.inventory-form button {
+  display: block;
+  margin: 1.5rem auto 0;
+  padding: 0.6rem 1.5rem;
+}
+
+.inventory-form a {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+  color: #005fa3;
+  text-decoration: none;
+}
+
+.inventory-form a:hover {
+  text-decoration: underline;
+}
+
+#classificationList {
+  width: 100%;
+  padding: 0.7rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  background: white;
+}
+
+#classificationList:focus {
+  border-color: #00bfff;
+  outline: none;
+}
+
 /*** Footer ***/
 footer {
   text-align: left;
