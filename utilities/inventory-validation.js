@@ -12,7 +12,7 @@ validate.classificationRules = () => {
       .escape()
       .notEmpty()
       .isAlphanumeric()
-      .withMessage("Classification name cannot contain spaces or special characters."),
+      .withMessage("Classification name must contain alphabetic characters only."),
   ]
 }
 
