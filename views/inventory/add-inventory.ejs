@@ -14,19 +14,22 @@
 
   <label for="inv_make">Make:</label>
   <input type="text" name="inv_make" id="inv_make" required
+    placeholder="Min of 3 characters" minlength="3"
     value="<%= locals.inv_make %>">
 
   <label for="inv_model">Model:</label>
   <input type="text" name="inv_model" id="inv_model" required
+    placeholder="Min of 3 characters" minlength="3"
     value="<%= locals.inv_model %>">
 
   <label for="inv_year">Year:</label>
   <input type="number" name="inv_year" id="inv_year" required
+    placeholder="4-digit year"
     min="1900" max="2099"
     value="<%= locals.inv_year %>">
 
   <label for="inv_description">Description:</label>
-  <textarea name="inv_description" id="inv_description" required><%= locals.inv_description %></textarea>
+  <textarea name="inv_description" id="inv_description" required placeholder="Describe the vehicle"><%= locals.inv_description %></textarea>
 
   <label for="inv_image">Image Path:</label>
   <input type="text" name="inv_image" id="inv_image" required
@@ -38,18 +41,55 @@
 
   <label for="inv_price">Price:</label>
   <input type="number" name="inv_price" id="inv_price" required
+    placeholder="decimal or integer"
     min="0"
     value="<%= locals.inv_price %>">
 
   <label for="inv_miles">Miles:</label>
   <input type="number" name="inv_miles" id="inv_miles" required
+    placeholder="digits only"
     min="0"
     value="<%= locals.inv_miles %>">
 
   <label for="inv_color">Color:</label>
   <input type="text" name="inv_color" id="inv_color" required
+    placeholder="e.g. Red"
     value="<%= locals.inv_color %>">
 
   <button type="submit">Add Inventory</button>
 </form>
 <a href="/inv/">Back to Management</a>
+
+// this allows the placeholder to change according to the information
+<script>
+  const form = document.querySelector('.inventory-form')
+  const fields = form.querySelectorAll('input, textarea, select')
+
+  fields.forEach(field => {
+    // While typing: show red or green
+    field.addEventListener('input', () => {
+      const valid = field.checkValidity() && field.value.trim() !== ''
+      field.classList.toggle('valid', valid)
+      field.classList.toggle('invalid', !valid && field.value.trim() !== '')
+    })
+
+    // On leave: if valid, go white (remove both classes)
+    field.addEventListener('blur', () => {
+      if (field.checkValidity() && field.value.trim() !== '') {
+        field.classList.remove('valid', 'invalid')
+      } else if (field.value.trim() === '' && field.required) {
+        field.classList.add('invalid')
+      }
+    })
+  })
+
+  // On submit: turn all empty required fields red
+  form.addEventListener('submit', () => {
+    fields.forEach(field => {
+      if (!field.checkValidity() || field.value.trim() === '') {
+        field.classList.add('invalid')
+        field.classList.remove('valid')
+      }
+    })
+  })
+</script>

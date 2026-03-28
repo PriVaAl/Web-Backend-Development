@@ -45,14 +45,14 @@ validate.inventoryRules = () => {
       .escape()
       .notEmpty()
       .isLength({ min: 1 })
-      .withMessage("Please provide a make."),
+      .withMessage("A vehicle make is required."),
 
     body("inv_model")
       .trim()
       .escape()
       .notEmpty()
       .isLength({ min: 1 })
-      .withMessage("Please provide a model."),
+      .withMessage("A vehicle model is required."),
 
     body("inv_year")
       .trim()
@@ -64,7 +64,7 @@ validate.inventoryRules = () => {
       .trim()
       .escape()
       .notEmpty()
-      .withMessage("Please provide a description."),
+      .withMessage("Please provide a vehicle description."),
 
     body("inv_image")
       .trim()
@@ -80,7 +80,7 @@ validate.inventoryRules = () => {
       .trim()
       .notEmpty()
       .isCurrency({ allow_negatives: false })
-      .withMessage("Please provide a valid price."),
+      .withMessage("Please provide a valid vehicle price."),
 
     body("inv_miles")
       .trim()
@@ -92,7 +92,7 @@ validate.inventoryRules = () => {
       .trim()
       .escape()
       .notEmpty()
-      .withMessage("Please provide a color."),
+      .withMessage("Vehicle color is required."),
 
     body("classification_id")
       .notEmpty()

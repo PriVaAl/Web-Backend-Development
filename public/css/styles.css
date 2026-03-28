@@ -639,6 +639,20 @@ img {
   border-color: #00bfff;
   outline: none;
 }
+/* Live validation feedback */
+input.valid,
+textarea.valid,
+select.valid {
+  border: 2px solid #28a745;
+  background-color: #f0fff4;
+}
+
+input.invalid,
+textarea.invalid,
+select.invalid {
+  border: 2px solid #dc3545;
+  background-color: #fff5f5;
+}
 
 /*** Footer ***/
 footer {
