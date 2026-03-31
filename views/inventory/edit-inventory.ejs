@@ -1,4 +1,4 @@
-<h1>Add New Inventory</h1>
+<h1>Edit <%= locals.inv_make %> <%= locals.inv_model %></h1>
 <%- messages() %>
 <% if (errors) { %>
   <ul class="notice">
@@ -7,56 +7,61 @@
     <% }) %>
   </ul>
 <% } %>
-<form class="inventory-form" action="/inv/add-inventory" method="post">
+<form class="inventory-form" id="updateForm" action="/inv/update" method="post">
 
-  <label for="classification_id">Classification:</label>
-  <%- classificationList %>
+  <label for="classification_id">Classification</label>
+  <%- classificationSelect %>
 
-  <label for="inv_make">Make:</label>
+  <label for="inv_make">Make</label>
   <input type="text" name="inv_make" id="inv_make" required
     placeholder="Min of 3 characters" minlength="3"
     value="<%= locals.inv_make %>">
 
-  <label for="inv_model">Model:</label>
+  <label for="inv_model">Model</label>
   <input type="text" name="inv_model" id="inv_model" required
     placeholder="Min of 3 characters" minlength="3"
     value="<%= locals.inv_model %>">
 
-  <label for="inv_year">Year:</label>
+  <label for="inv_year">Year</label>
   <input type="number" name="inv_year" id="inv_year" required
     placeholder="4-digit year"
     min="1900" max="2099"
     value="<%= locals.inv_year %>">
 
-  <label for="inv_description">Description:</label>
-  <textarea name="inv_description" id="inv_description" required placeholder="Describe the vehicle"><%= locals.inv_description %></textarea>
+  <label for="inv_description">Description</label>
+  <textarea name="inv_description" id="inv_description" required
+    placeholder="Describe the vehicle"><%= locals.inv_description %></textarea>
 
-  <label for="inv_image">Image Path:</label>
+  <label for="inv_image">Image Path</label>
   <input type="text" name="inv_image" id="inv_image" required
-    value="<%= locals.inv_image || '/images/vehicles/no-image.png' %>">
+    value="<%= locals.inv_image %>">
 
-  <label for="inv_thumbnail">Thumbnail Path:</label>
+  <label for="inv_thumbnail">Thumbnail Path</label>
   <input type="text" name="inv_thumbnail" id="inv_thumbnail" required
-    value="<%= locals.inv_thumbnail || '/images/vehicles/no-image-tn.png' %>">
+    value="<%= locals.inv_thumbnail %>">
 
-  <label for="inv_price">Price:</label>
+  <label for="inv_price">Price</label>
   <input type="number" name="inv_price" id="inv_price" required
     placeholder="decimal or integer"
     min="0"
     value="<%= locals.inv_price %>">
 
-  <label for="inv_miles">Miles:</label>
+  <label for="inv_miles">Miles</label>
   <input type="number" name="inv_miles" id="inv_miles" required
     placeholder="digits only"
     min="0"
     value="<%= locals.inv_miles %>">
 
-  <label for="inv_color">Color:</label>
+  <label for="inv_color">Color</label>
   <input type="text" name="inv_color" id="inv_color" required
     placeholder="e.g. Red"
     value="<%= locals.inv_color %>">
 
-  <button type="submit">Add Inventory</button>
+  <button type="submit" disabled>Update Vehicle</button>
+
+  <input type="hidden" name="inv_id"
+  <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+  <% } %>>
 </form>
 <a href="/inv/">Back to Management</a>
 
@@ -65,14 +70,11 @@
   const fields = form.querySelectorAll('input, textarea, select')
 
   fields.forEach(field => {
-    // While typing: show red or green
     field.addEventListener('input', () => {
       const valid = field.checkValidity() && field.value.trim() !== ''
       field.classList.toggle('valid', valid)
       field.classList.toggle('invalid', !valid && field.value.trim() !== '')
     })
-
-    // On leave: if valid, go white (remove both classes)
     field.addEventListener('blur', () => {
       if (field.checkValidity() && field.value.trim() !== '') {
         field.classList.remove('valid', 'invalid')
@@ -82,7 +84,6 @@
     })
   })
 
-  // On submit: turn all empty required fields red
   form.addEventListener('submit', () => {
     fields.forEach(field => {
       if (!field.checkValidity() || field.value.trim() === '') {
@@ -92,3 +93,4 @@
     })
   })
 </script>
+<script src="/js/inv-update.js"></script> 
