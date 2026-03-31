@@ -5,6 +5,7 @@
 /* ***********************
  * Require Statements
  *************************/
+const cookieParser = require("cookie-parser")
 const accountRoute = require("./routes/accountRoute")
 const session = require("express-session")
 const pool = require('./database/')
@@ -47,6 +48,8 @@ app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res)
   next()
 })
+app.use(cookieParser())
+app.use(utilities.checkJWTToken)
 
 /* ***********************
  * View Engine and Templates
@@ -73,7 +76,6 @@ app.use(async (req, res, next) => {
 
 /* ***********************
 * Express Error Handler
-* Place after all other middleware
 *************************/
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
