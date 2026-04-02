@@ -712,6 +712,7 @@ img {
   border-color: #00bfff;
   outline: none;
 }
+
 /* Live validation feedback */
 input.valid,
 textarea.valid,
@@ -725,6 +726,72 @@ textarea.invalid,
 select.invalid {
   border: 2px solid #dc3545;
   background-color: #fff5f5;
+}
+
+/*** Delete Confirmation Form ***/
+.delete-form {
+  max-width: 500px;
+  margin: 1rem auto;
+  padding: 2rem;
+  border: 2px solid #b30000;
+  border-radius: 8px;
+  background-color: #fff5f5;
+}
+
+.delete-form fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.delete-form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+  margin-top: 1rem;
+  color: #333;
+}
+
+.delete-form input[readonly] {
+  width: 100%;
+  padding: 0.7rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: #f4f4f4;
+  color: #555;
+  cursor: not-allowed;
+}
+
+.delete-form button {
+  display: block;
+  margin: 1.5rem auto 0;
+  padding: 0.6rem 1.5rem;
+  background-color: #b30000;
+  color: white;
+}
+
+.delete-form button:hover {
+  background-color: #800000;
+}
+
+.delete-form a {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+  color: #005fa3;
+  text-decoration: none;
+}
+
+.delete-form a:hover {
+  text-decoration: underline;
+}
+
+.delete-confirm-msg {
+  color: #b30000;
+  font-weight: bold;
+  margin-bottom: 1rem;
 }
 
 /*** Footer ***/
