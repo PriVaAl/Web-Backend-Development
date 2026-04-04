@@ -175,5 +175,25 @@ Util.checkJWTToken = (req, res, next) => {
     return res.redirect("/account/login")
   }
  }
+/* ****************************************
+ * Middleware to check account type
+ * Only allows Employee or Admin access
+ **************************************** */
+Util.checkAccountType = (req,res, next) =>
+{
+  if (res.locals.loggedin) {
+    if (res.locals.accountData.account_type == "Employee" ||
+      res.locals.accountData.account_type == "Admin") {
+        next()
+      } else {
+        req.flash("notice", "You do not have permission to access this resource.")
+        return res.redirect("/account/login")
+      }
+  } else {
+    req.flash("notice", "Please log in")
+    return res.redirect("/account/login")
+
+  }
+}
 
 module.exports = Util

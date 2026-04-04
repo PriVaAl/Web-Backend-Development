@@ -793,7 +793,31 @@ select.invalid {
   font-weight: bold;
   margin-bottom: 1rem;
 }
+/*** Account Management View ***/
+.account-management h2 {
+  color: #333;
+  border-bottom: none;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
 
+.account-management h3 {
+  color: #333;
+  font-size: 1.1rem;
+  margin-top: 1.5rem;
+}
+
+.account-management a {
+  display: inline-block;
+  color: #005fa3;
+  text-decoration: underline;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.account-management p {
+  margin: 0.3rem 0;
+}
 /*** Footer ***/
 footer {
   text-align: left;

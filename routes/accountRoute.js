@@ -29,4 +29,15 @@ router.post(
 // Route to build account management view
 router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagement))
 
+//Route to log out 
+router.get("/logout",(req, res)=>
+{
+  res.clearCookie("jwt")
+  res.redirect("/")
+})
+
+//Route to build update account view
+router.get("/update/:account_id", 
+  utilities.handleErrors(accountController.buildUpdateAccount)
+)
 module.exports = router;
