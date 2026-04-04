@@ -149,4 +149,67 @@ async function buildUpdateAccount(req, res, next) {
   })
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, buildUpdateAccount}
+/* ****************************************
+ *  Process account update
+ * *************************************** */
+async function updateAccount(req,res) {
+  let nav= await utilities.getNav()
+  const { account_firstname, account_lastname, account_email, account_id} = req.body
+  const updateResult = await accountModel.updateAccount(
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id
+  )
+  if (updateResult) {
+    const accountData = await accountModel.getAccountById(account_id)
+    delete accountData.account_password
+    const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET,{ expiresIn: 3600 * 1000 })
+    if (process.env.NODE_ENV === 'development') {
+      res.cookie("jwt", accessToken, {httpOnly: true, maxAge:3600 *1000})
+    } else {
+      res.cookie("jwt", accessToken, {httpOnly: true, secure: true, maxAge:3600 *1000})
+    }
+    req.flash("notice", `Your account has been udpated successfully.`)
+    res.redirect("/account/")
+  } else {
+    req.flash("notice", "Sorry, the update failed.")
+    res.status(501).render("account/update", {
+      title: "Edit Account",
+      nav,
+      errors: null,
+      account_firstname,
+      account_lastname,
+      account_email,
+      account_id,
+    })
+  }
+}
+
+/* ****************************************
+ *  Process password change
+ * *************************************** */
+async function changePassword(req,res) {
+  let nav = await utilities.getNav()
+  const { account_password, account_id } = req.body
+  let hashedPassword
+  try {
+    hashedPassword = await bcrypt.hashSync(account_password, 10)
+  } catch (error) {
+    req.flash("notice", ' there was an error processing the password change.')
+    res.status(500).redirect(`/account/update/${account_id}`)
+    return
+  }
+  const updateResult = await accountModel.updatePassword(hashedPassword, account_id)
+  if (updateResult) {
+    req.flash("notice", "Your password has been updated successfully.")
+    res.redirect("/account/")
+  } else {
+    req.flash("notice", "Sorry, the password change failed.")
+    res.status(501).redirect(`/account/update/${account_id}`)
+  }
+  
+}
+
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, buildUpdateAccount, updateAccount, changePassword }
