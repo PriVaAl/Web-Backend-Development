@@ -102,3 +102,9 @@ const host = process.env.HOST
 app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`)
 })
+
+/* ***********************
+ * Register the reviews route for Enhacment to the project
+ *************************/
+const reviewsRoute = require("./routes/reviewsRoute")
+app.use("/reviews", reviewsRoute)

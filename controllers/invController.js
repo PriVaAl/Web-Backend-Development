@@ -278,4 +278,30 @@ invCont.deleteItem = async function (req, res, next) {
   }
 }
 
+/* ******************
+ * Pass the Review Data --> Enhacement project week 6 
+ ******************* */
+invCont.buildByInventoryId = utilities.handleErrors(async function (req, res, next) {
+  const inv_id = req.params.invId
+  const data = await invModel.getInventoryById(inv_id)
+  const detail = await utilities.buildVehicleDetail(data)
+  let nav = await utilities.getNav()
+  const vehicleName = `${data.inv_year} ${data.inv_make} ${data.inv_model}`
+  
+  // Get reviews and average rating
+  const reviewsModel = require("../models/reviews-model")
+  const reviews = await reviewsModel.getReviewsByInvId(inv_id)
+  const avgRating = await reviewsModel.getAverageRating(inv_id)
+
+  res.render("./inventory/detail", {
+    title: vehicleName,
+    nav,
+    detail,
+    inv_id,
+    reviews,
+    avgRating,
+  })
+})
+
+
 module.exports = invCont

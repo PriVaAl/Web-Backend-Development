@@ -1,0 +1,33 @@
+<h1><%= title %></h1>
+<%- message () %>
+<% if (errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+<form class="review-form" action="/reviews/add" method="post">
+    <h2>Review: <%= itemName %></h2>
+    <label for="review_rating">Star Rating</label>
+  <div class="star-rating">
+    <% for(let i = 5; i >= 1; i--) { %>
+      <input type="radio" name="review_rating" 
+        id="star<%= i %>" value="<%= i %>"
+        <%= locals.review_rating == i ? 'checked' : '' %> required>
+      <label for="star<%= i %>">★</label>
+    <% } %>
+  </div>
+
+  <label for="review_text">Your Review</label>
+  <textarea name="review_text" id="review_text" required
+    placeholder="Write your review here (minimum 10 characters)..."
+    minlength="10"><%= locals.review_text || '' %></textarea>
+
+  <input type="hidden" name="inv_id" value="<%= inv_id %>">
+
+  <button type="submit">Submit Review</button>
+
+</form>
+
+<a href="/inv/detail/<%= inv_id %>">Back to Vehicle</a>

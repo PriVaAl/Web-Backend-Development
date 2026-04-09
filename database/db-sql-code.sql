@@ -248,3 +248,14 @@ UPDATE public.inventory
 SET
 inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
 inv_thumbnail = REPLACE(inv_thumbnail,'/images/','/images/vehicles/');
+
+--Additional Enhancement for week 6 
+
+CREATE TABLE reviews (
+  review_id SERIAL PRIMARY KEY,
+  review_text TEXT NOT NULL,
+  review_rating INT CHECK (review_rating >= 1 AND review_rating <= 5),
+  review_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  account_id INT REFERENCES account(account_id) ON DELETE CASCADE,
+  inv_id INT REFERENCES inventory(inv_id) ON DELETE CASCADE
+);
