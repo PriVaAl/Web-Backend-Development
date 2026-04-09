@@ -1,5 +1,5 @@
 const express = require("express")
-const router = nex .express.router()
+const router = new express.Router()
 const reviewsController = require("../controllers/reviewsController")
 const utilities = require("../utilities/")
 const { body, validationResult} = require("express-validator")
@@ -11,7 +11,7 @@ const reviewValidation = [
         .notEmpty()
         .isLength({min: 10})
         .withMessage("Review must be at least 10 characteres."),
-    body("review-rating")
+    body("review_rating")
         .notEmpty()
         .isInt({min:1, max:5})
         .withMessage("Rating must be between 1 and 5.")

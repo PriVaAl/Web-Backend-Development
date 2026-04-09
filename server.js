@@ -75,6 +75,13 @@ app.use(async (req, res, next) => {
 })
 
 /* ***********************
+ * Register the reviews route for Enhacement to the project -->week 6
+ *************************/
+const reviewsRoute = require("./routes/reviewsRoute")
+app.use("/reviews", reviewsRoute)
+
+
+/* ***********************
 * Express Error Handler
 *************************/
 app.use(async (err, req, res, next) => {
@@ -87,7 +94,6 @@ app.use(async (err, req, res, next) => {
     nav
   })
 })
-
 
 /* ***********************
  * Local Server Information
@@ -103,8 +109,3 @@ app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`)
 })
 
-/* ***********************
- * Register the reviews route for Enhacment to the project
- *************************/
-const reviewsRoute = require("./routes/reviewsRoute")
-app.use("/reviews", reviewsRoute)

@@ -21,7 +21,7 @@ invCont.buildByClassificationId = utilities.handleErrors(async function (req, re
 
 /* ***************************
  *  Build inventory item detail view
- * ************************** */
+ * 
 invCont.buildByInventoryId = utilities.handleErrors(async function (req, res, next) {
   const inv_id = req.params.invId
   const data = await invModel.getInventoryById(inv_id)
@@ -33,7 +33,7 @@ invCont.buildByInventoryId = utilities.handleErrors(async function (req, res, ne
     nav,
     detail,
   })
-})
+})************************** */
 
 /* ***************************
  *  Trigger intentional 500 error
@@ -156,7 +156,7 @@ invCont.getInventoryJSON = async (req, res, next) => {
 }
 
 /* *************************
- * Build edit inventory view
+ * Build edit inventory view 
  * ************************* */
 invCont.buildEditInventory = async function (req, res, next) {
   const inv_id = parseInt(req.params.inv_id)

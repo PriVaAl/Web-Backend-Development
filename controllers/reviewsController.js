@@ -7,18 +7,18 @@ const revCont = {}
 /* *****************************
  * Build add review view
  * ***************************** */
-revCont.buildAddReview = async function (re1, res, next) {
-    const inv_id = parseInt(req.params.inv_id)
-    let nav = await utilities.getNav()
-    const itemData = await invModel.getInventoryById(inv_id)
-    const itemName = `${itemData.inv_year} ${itemData.inv_make} ${itemData.inv_model}`
-    res.render("reviews/add-review", {
-        title: "Review" + itemName,
-        nav,
-        errors: null,
-        inv_id,
-        itemName,
-    })   
+revCont.buildAddReview = async function(req, res, next) {
+  const inv_id = parseInt(req.params.inv_id)
+  let nav = await utilities.getNav()
+  const itemData = await invModel.getInventoryById(inv_id)
+  const itemName = `${itemData.inv_year} ${itemData.inv_make} ${itemData.inv_model}`
+  res.render("reviews/add-review", {
+    title: "Review " + itemName,
+    nav,
+    errors: null,
+    inv_id,
+    itemName,
+  })
 }
 
 /* *****************************
@@ -64,32 +64,31 @@ revCont.addReview = async function(req, res, next) {
 /* *****************************
  * Build my reviews view
  * ***************************** */
-revCont.buildMyReviews = async function (req, res, next) {
-    let nav = await utilities.getNav()
-    const account_id = res.locals.accountData.account_id
-    const reviews = await reviewsModel.getReviewsByAccountId(account_id)
-    res.render("reviews/my-reviews", {
-        title: "My Reviews",
-        nav,
-        errors: null,
-        reviews,
-    })    
-} 
+revCont.buildMyReviews = async function(req, res, next) {
+  let nav = await utilities.getNav()
+  const account_id = res.locals.accountData.account_id
+  const reviews = await reviewsModel.getReviewsByAccountId(account_id)
+  res.render("reviews/my-reviews", {
+    title: "My Reviews",
+    nav,
+    errors: null,
+    reviews,
+  })
+}
 
 /* *****************************
  * Delete review
  * ***************************** */
-revCont.deleteReview = async function (req, res, next) {
-    const account_id = res.locals.accountData.account_id
-    const review_id = parseInt(req.params.review_id)
-    const resul = await reviewsModel.deleteReview(review_id, account_id)
-    if (result.rowCount) {
-        req.flas("notice", "Your review has been deleted.")
-    } else {
-        req.flas("notice", "Sorry, the review could not be deleted.")
-    }
-    res.redirect("/reviews/my-reviews")
+revCont.deleteReview = async function(req, res, next) {
+  const account_id = res.locals.accountData.account_id
+  const review_id = parseInt(req.params.review_id)
+  const result = await reviewsModel.deleteReview(review_id, account_id)
+  if (result.rowCount) {
+    req.flash("notice", "Your review has been deleted.")
+  } else {
+    req.flash("notice", "Sorry, the review could not be deleted.")
+  }
+  res.redirect("/reviews/my-reviews")
 }
 
 module.exports = revCont
-    
