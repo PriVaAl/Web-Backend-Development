@@ -64,6 +64,13 @@ app.set("layout", "./layouts/layout") // not at views root
 app.use(staticRoutes)
 app.use("/inv", inventoryRoute)
 app.use("/account", accountRoute)
+
+/* ***********************
+ * Register the reviews route for Enhacement to the project -->week 6
+ *************************/
+const reviewsRoute = require("./routes/reviewsRoute")
+app.use("/reviews", reviewsRoute)
+
 /*************************
  * Index route
  */
@@ -74,11 +81,7 @@ app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
 })
 
-/* ***********************
- * Register the reviews route for Enhacement to the project -->week 6
- *************************/
-const reviewsRoute = require("./routes/reviewsRoute")
-app.use("/reviews", reviewsRoute)
+
 
 
 /* ***********************
